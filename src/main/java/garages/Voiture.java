@@ -7,6 +7,7 @@ public class Voiture {
 
 	private final String immatriculation;
 	private final List<Stationnement> myStationnements = new LinkedList<>();
+	private final Set<Garage> myGarages = new HashSet<>();
 
 	public Voiture(String i) {
 		if (null == i) {
@@ -19,6 +20,8 @@ public class Voiture {
 	public String getImmatriculation() {
 		return immatriculation;
 	}
+
+
 
 	/**
 	 * Fait rentrer la voiture au garage
@@ -41,7 +44,13 @@ public class Voiture {
 	 * @throws java.lang.Exception si la voiture n'est pas dans un garage
 	 */
 	public void sortDuGarage() throws Exception {
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		if (!this.estDansUnGarage()) {
+			throw new UnsupportedOperationException("Cette voiture n'est pas dans un garage");
+		} else {
+			myStationnements.get(myStationnements.size() - 1).terminer();
+		}
+
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// TODO: Implémenter cette méthode
 		// Trouver le dernier stationnement de la voiture
 		// Terminer ce stationnement
@@ -51,16 +60,25 @@ public class Voiture {
 	 * @return l'ensemble des garages visités par cette voiture
 	 */
 	public Set<Garage> garagesVisites() {
+		return myGarages;
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 	}
 
 	/**
 	 * @return vrai si la voiture est dans un garage, faux sinon
 	 */
 	public boolean estDansUnGarage() {
+		if (myStationnements.isEmpty()) {
+			return false;
+		}
+		if (myStationnements.get(myStationnements.size() - 1).estEnCours() == true) {
+			return true;
+		} else {
+			return false;
+		}
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 		// Vrai si le dernier stationnement est en cours
 	}
 
@@ -81,8 +99,23 @@ public class Voiture {
 	 * @param out l'endroit où imprimer (ex: System.out)
 	 */
 	public void imprimeStationnements(PrintStream out) {
+		List<Stationnement> stationnements = new LinkedList<>(myStationnements);
+
+		for (int i = 0; i < stationnements.size() ; i++){
+			String garage = stationnements.get(i).getGarage().toString();
+			out.append(garage + "\n");
+			out.append(stationnements.get(i).toString() + "\n");
+		}
+
+		for (int j = i+1; j < stationnements.size() ; j++){
+			if(stationnements.get(j).getGarage() == stationnements.get(i).getGarage()) {
+				out.append(stationnements.get(j).toString + "\n");
+				stationnements.remove(stationnements.get(j));
+			}
+			}
+		}
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		//throw new UnsupportedOperationException("Pas encore implémenté");
 	}
 
-}
+
