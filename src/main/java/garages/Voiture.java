@@ -105,11 +105,11 @@ public class Voiture {
 			String garage = stationnements.get(i).getGarage().toString();
 			out.append(garage + "\n");
 			out.append(stationnements.get(i).toString() + "\n");
-		}
 
-		for (int j = i+1; j < stationnements.size() ; j++){
+
+		for (int j = i + 1; j < stationnements.size() ; j++){
 			if(stationnements.get(j).getGarage() == stationnements.get(i).getGarage()) {
-				out.append(stationnements.get(j).toString + "\n");
+				out.append(stationnements.get(j).toString() + "\n");
 				stationnements.remove(stationnements.get(j));
 			}
 			}
@@ -117,5 +117,6 @@ public class Voiture {
 		// TODO: Implémenter cette méthode
 		//throw new UnsupportedOperationException("Pas encore implémenté");
 	}
+}
 
 
